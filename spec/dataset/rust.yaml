@@ -72,3 +72,24 @@ parse_var:
         - should parse variable declaration with value from function call
         - let bar = get_some_value();
         - ['bar', null, null]
+    # destructuring is not supported yet
+    -
+        - should parse variable declaration with struct destructuring
+        - let Foo { x, y } = foo;
+        - [['x', 'y'], null, null]
+    -
+        - should parse variable declaration with struct destructuring and values
+        - 'let Foo{ x, y } = Foo{ x: 42, y: 5.2};'
+        - [['x', 'y'], null, null]
+    -
+        - should parse variable declaration with struct destructuring, values and type suffixes
+        - 'let Foo{ x, y } = Foo{ x: 5i32, y: 80f64};'
+        - [['x', 'y'], null, null]
+    -
+        - should parse variable declaration with tuple destructuring
+        - let (a, b) = foo;
+        - [['a', 'b'], null, null]
+    -
+        - should parse variable declaration with tuple destructuring and values
+        - let (d, e) = (15, 42);
+        - [['d', 'e'], null, null]
